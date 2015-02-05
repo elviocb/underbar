@@ -94,6 +94,11 @@
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
+    var result = [];
+    _.each(array, function(i){
+      if (_.indexOf(result, i) === -1) result.push(i)
+    });
+    return result;
   };
 
 
