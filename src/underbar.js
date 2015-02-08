@@ -152,7 +152,25 @@
   //     return total + number * number;
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
+ 
   _.reduce = function(collection, iterator, accumulator) {
+    // var result, n;   
+    // if (!accumulator && accumulator !== 0) { 
+    //   result = collection[0];
+    //   n = 1; 
+    // } else {
+    //   result = accumulator;
+    //   n = 0;
+    // }
+    // _.each(collection.slice(n, collection.length), function(item, key) {      
+    //     result = iterator(result, item);  
+    // });
+    // return result;
+    /* Best Solution */
+    _.each(collection, function(item){
+      accumulator = (accumulator === undefined) ? item : iterator(accumulator, item);
+    });
+    return accumulator;
   };
 
   // Determine if the array or object contains a given value (using `===`).
