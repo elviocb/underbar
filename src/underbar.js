@@ -295,6 +295,32 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+
+    // var add = function(a,b){return a + b};
+    // var memoAdd = _.memoize(add);
+
+    // var memo = {},
+    //     value;
+
+    // return function() {
+    //   var onlyArgs = _.filter(arguments, function(i) {
+    //     return typeof i === 'number'
+    //   });
+
+    //   if (memo[onlyArgs] === undefined){
+    //     value = func.apply(this, arguments);
+    //     memo[onlyArgs] = value;
+    //     return value;
+    //   }
+    //   return memo[onlyArgs];
+    // }
+
+    /* Clever Solution */
+    var memo = {};
+    return function() {
+      var key = _.map(arguments, function(i){return i});
+      return memo[key] !== undefined ? memo[key] : memo[key] = func.apply(this, arguments);
+    }
   };
 
   // Delays a function for the given number of milliseconds, and then calls
