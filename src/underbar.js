@@ -377,6 +377,129 @@
   // of that string. For example, _.sortBy(people, 'name') should sort
   // an array of people by their name.
   _.sortBy = function(collection, iterator) {
+    if (typeof iterator === 'string') {
+      return collection.sort(function(a,b){
+        return a[iterator] - b[iterator];
+      });
+    } else {
+     return collection.sort(function(a,b){
+       return iterator(a) - iterator(b);
+     }); 
+    }
+
+    // var filtered, bigger, result = []; 
+
+    // if (typeof iterator === 'string') {
+    //   filtered = _.pluck(collection, iterator);
+    // } else {
+    //   filtered = _.map(collection, iterator);
+    // }
+    // var stop = false,
+    //     timesFalse = 0;
+    // console.log(timesFalse);
+    // console.log(collection.length - 1);
+    // while (timesFalse < collection.length -1) {
+    //   timesFalse = 0;
+
+    //   for (var i = 0; i < collection.length -1; i++) {
+    //     // console.log(i);
+    //     var a = collection[i],
+    //         b = collection[i+1],
+    //         x = (iterator === 'string') ? a[iterator] : iterator(a),
+    //         y = (iterator === 'string') ? b[iterator] : iterator(b),
+    //         tp;
+        
+    //     // BUILD UNDEFINED
+
+    //     if (x > y) {
+    //       tp = a; 
+    //       collection.splice(i, 1, b);
+    //       collection.splice(i+1, 1, tp);
+    //     } else { 
+    //       timesFalse++;
+    //     }
+    //     // console.log('collection AFTER change: ', collection);
+    //     console.log('collection.length: ', collection.length, 'timesFalse: ', timesFalse);
+    //   }
+
+    // }
+
+    // function keepLooping(){
+    //   var test = false;
+    //   _.reduce(collection, function(a,b){
+    //     var x = (iterator === 'string') ? a[iterator] : iterator(a),
+    //         y = (iterator === 'string') ? b[iterator] : iterator(b);
+
+    //     if ((x === undefined) || x > y) test = true;
+    //     return b;
+    //   });
+    //   return test;  
+    // }
+
+    // // var collection = ['elvio', 'legal', 'casa', 'bolo'];
+
+  
+    // while (keepLooping()) {
+      
+    //   for (var i = 0; i < collection.length -1; i++) {
+    //     // console.log(i);
+    //     var a = collection[i],
+    //         b = collection[i+1],
+    //         x = (iterator === 'string') ? a[iterator] : iterator(a),
+    //         y = (iterator === 'string') ? b[iterator] : iterator(b),
+    //         tp;
+    //         console.log('x:', x, ' y:', y);
+        
+    //     // BUILD UNDEFINED
+
+    //     if (x === undefined) {
+    //       tp = a; 
+    //       collection.splice(i, 1);
+    //       collection.push(tp);         
+    //     }
+    //     if (x > y) {
+    //       tp = a; 
+    //       collection.splice(i, 1, b);
+    //       collection.splice(i+1, 1, tp);
+    //     } else { 
+    //       timesFalse++;
+    //     }
+    //     // console.log('collection AFTER change: ', collection);
+    //     console.log('collection.length: ', collection.length, 'timesFalse: ', timesFalse);
+    //   }
+    // }
+
+      // for (var i = 0; i < collection.length -1; i++) {
+      //   var a = collection[i],
+      //       b = collection[i+1],
+      //       tp;         
+
+      //   bigger = _.reduce(temp, function(a,b){
+                   
+      //              //captures the values
+      //              var x = (typeof iterator === 'string') ? a[iterator] : iterator(a),
+      //                  y = (typeof iterator === 'string') ? b[iterator] : iterator(b),
+      //                  tp;
+                   
+      //              if (x === undefined) {
+      //               tp = x; 
+      //               collection.splice(i, 1);
+      //               collection.push(tp);
+      //              } else if (x > y) {
+      //               tp = a; 
+      //               collection.splice(i, 1, b);
+      //               collection.splice(i+1, 1, tp);                  
+      //            };
+      //          })
+
+        // collection.splice(collection.indexOf(bigger), 1);
+        // collection.unshift(bigger);
+      
+
+    
+    
+    // collection = result;
+    // return collection;
   };
 
   // Zip together two or more arrays with elements of the same index
