@@ -524,27 +524,45 @@
   //
   // Hint: Use Array.isArray to check if something is an array
   _.flatten = function(nestedArray, result) {
-    var result = _.map(nestedArray, function(i){return i}),
-        stopLooping = false;
+    // var result = _.map(nestedArray, function(i){return i}),
+    //     stopLooping = false;
 
-    while (!stopLooping) {
-      _.each(result, function(item, index) {
-        var tempArr;
-        if (Array.isArray(item)) {
-          // Store the sub array
-          tempArr = item;
-          // Delete the sub array inside the array
-          result.splice(index,1);
-          // Insert the sub array elements into the parent array
-          for (var i = tempArr.length -1; i >= 0; i--) {
-            result.splice(index,0,tempArr[i]);
-          };
-        }
-      });
-      // Verify whether there are remaining arrays into result.
-      stopLooping = _.every(result, function(i){return !Array.isArray(i)});
+    // while (!stopLooping) {
+    //   _.each(result, function(item, index) {
+    //     var tempArr;
+    //     if (Array.isArray(item)) {
+    //       // Store the sub array
+    //       tempArr = item;
+    //       // Delete the sub array inside the array
+    //       result.splice(index,1);
+    //       // Insert the sub array elements into the parent array
+    //       for (var i = tempArr.length -1; i >= 0; i--) {
+    //         result.splice(index,0,tempArr[i]);
+    //       };
+    //     }
+    //   });
+    //   // Verify whether there are remaining arrays into result.
+    //   stopLooping = _.every(result, function(i){return !Array.isArray(i)});
+    // }
+    // return result;
+    
+    /* ========== FLATTEN CLEVER SOLUTION 1 ========= */
+
+    // Checks whether an array is present inside the nestedArray
+    function checkArray(array){
+      return _.some(array, function(i) { return Array.isArray(i) });
     }
-    return result;
+
+    var result = [];
+
+    if (!checkArray(nestedArray)) {
+      return nestedArray;
+    }
+
+    return _.flatten(result.concat.apply(result, nestedArray));
+    
+    /* ======== END FLATTEN CLEVER SOLUTION 1 ======= */
+
   };
 
   // Takes an arbitrary number of arrays and produces an array that contains
